@@ -52,6 +52,23 @@
         .btn:hover {
             background-color: #ee0979;
         }
+        .hidden-letter {
+            width: 60%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .letter-content {
+            display: none;
+            font-size: 1.2em;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -67,7 +84,29 @@
             <img src="memory2.jpg" alt="Special moment">
             <p>Every moment with you is special, no matter how far apart we are! 💕</p>
         </div>
+        
+        <div class="hidden-letter" onclick="revealLetter()">
+            <h2>💌 Tap to Open Your Secret Letter 💌</h2>
+            <div class="letter-content" id="letter">
+                <p>Heyy jaanu! ❤️
+                <br><br>
+                Pata hai tu kitni special hai mere liye? 😘 Matlab duniya me itne log hain, par bas tu hi hai jo dil ko itna sukoon deti hai. 
+                <br><br>
+                Yeh Holi alag hai, kyunki is baar tujhe rang lagane ke liye paas nahi hoon. 😔 Par tension mat le, warna tujhe miss karne ke chakkar me main pura rangeen ho jaunga! 🌈😂
+                <br><br>
+                Jaldi milenge, tab tak ke liye yeh virtual pyaar accept karle. Happy Holi meri pyaari! 🌸💖
+                <br><br>
+                — Tera pagal 😍
+                </p>
+            </div>
+        </div>
     </div>
     <a href="index.html" class="btn">Back to Home</a>
+
+    <script>
+        function revealLetter() {
+            document.getElementById('letter').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
