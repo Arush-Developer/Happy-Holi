@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holi Surprise</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to right, #ff4e50, #fc913a);
+            font-family: 'Arial', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px black;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        #countdown {
+            font-size: 2em;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        #next-section {
+            display: none;
+            margin-top: 50px;
+        }
+        button {
+            background-color: #ffeb3b;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px black;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ffca28;
+        }
+        .color-burst {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 20%, rgba(255,0,0,0) 80%);
+            border-radius: 50%;
+            animation: burst 2s infinite;
+        }
+        @keyframes burst {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌸 Happy Holi, Saanu! 🎨</h1>
+    <p>Counting down to your special surprise...</p>
+    <div id="countdown"></div>
+    
+    <div id="next-section">
+        <h2>🎁 Welcome to Your Holi Surprise! 🎉</h2>
+        <p>Click below to reveal your first surprise.</p>
+        <button onclick="showScrapbook()">Open Scrapbook</button>
+    </div>
+
+    <script>
+        function startCountdown(targetDate) {
+            const countdownElement = document.getElementById('countdown');
+            const nextSection = document.getElementById('next-section');
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance <= 0) {
+                    countdownElement.innerHTML = "Time's Up!";
+                    nextSection.style.display = "block";
+                    clearInterval(interval);
+                } else {
+                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }
+            
+            updateCountdown();
+            const interval = setInterval(updateCountdown, 1000);
+        }
+        
+        function createColorBursts() {
+            for (let i = 0; i < 20; i++) {
+                let burst = document.createElement('div');
+                burst.className = 'color-burst';
+                burst.style.left = Math.random() * window.innerWidth + 'px';
+                burst.style.top = Math.random() * window.innerHeight + 'px';
+                burst.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(burst);
+            }
+        }
+        
+        window.onload = function() {
+            const targetDate = new Date("March 14, 2025 00:00:00").getTime(); // Indian Standard Time
+            startCountdown(targetDate);
+            createColorBursts();
+        };
+    </script>
+</body>
+</html>
