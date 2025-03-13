@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Scavenger Hunt</title>
+    <title>Quick Riddle</title>
     <style>
         body {
             text-align: center;
@@ -39,34 +39,14 @@
         .btn:hover {
             background-color: #ee0979;
         }
-        .qr-container {
-            margin-top: 20px;
-        }
         #answerSection {
-            display: none;
             margin-top: 20px;
-        }
-        .qr-code {
-            width: 200px;
-            height: 200px;
-            margin: 20px auto;
-            background: white;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <h1>🔍 QR Scavenger Hunt 🔍</h1>
-    <p>Scan the QR Code below and answer the question to unlock your final surprise!</p>
-    
-    <div class="qr-container">
-        <div class="qr-code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com/qr_hunt.html" alt="Scan this QR" onclick="showQuestion()">
-        </div>
-    </div>
+    <h1>🧠 Quick Riddle 🧠</h1>
+    <p><strong>Are! Ruko Zara Sabar Karo! Answer this first to see next! 😏</strong></p>
     
     <div id="answerSection">
         <p>When did we come into a relationship?</p>
@@ -75,10 +55,6 @@
     </div>
     
     <script>
-        function showQuestion() {
-            document.getElementById("answerSection").style.display = "block";
-        }
-
         function checkAnswer() {
             const answer = document.getElementById('answerInput').value;
             const correctAnswers = ["2023-11-22", "22-11-2023", "22 November 2023"];
