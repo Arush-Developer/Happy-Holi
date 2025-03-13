@@ -64,18 +64,18 @@
 </head>
 <body>
 
-    <h1>🎶 Surprise! Your Special Song & Video are Playing! 🎶</h1>
+    <h1>🎶 Surprise! Your Special Song is Playing! 🎶</h1>
     <p>Enjoy this moment, my love! ❤️</p>
 
-    <!-- Autoplaying Song -->
+    <!-- Background Music (Always Playing) -->
     <audio id="bgMusic" loop>
         <source src="your-song.mp3" type="audio/mp3">
         <source src="your-song.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Autoplaying Video (Muted Initially) -->
+    <!-- Video (Only Plays When Clicked) -->
     <div class="video-container">
-        <video id="surpriseVideo" width="100%" controls muted>
+        <video id="surpriseVideo" width="100%" controls>
             <source src="your-video.mp4" type="video/mp4">
         </video>
     </div>
@@ -83,7 +83,7 @@
     <!-- Virtual Holi Experience -->
     <button class="btn" onclick="throwColors()">🎨 Click for Virtual Holi Splash! 🌈</button>
 
-    <!-- Buttons to navigate -->
+    <!-- Navigation Buttons -->
     <a href="scrapbook.html" class="btn">📖 Back to Scrapbook</a>
     <a href="qr_hunt.html" class="btn">🔍 Next!?</a>
 
@@ -92,19 +92,19 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let audio = document.getElementById("bgMusic");
-            let video = document.getElementById("surpriseVideo");
 
             audio.volume = 0.3; // Set volume to 30%
 
-            // Start audio & video on first user interaction
-            document.body.addEventListener("click", function () {
+            // Start playing music when user clicks anywhere on the page
+            function startMusic() {
                 if (audio.paused) {
                     audio.play().catch(error => console.log("Autoplay blocked:", error));
                 }
-                if (video.paused) {
-                    video.play().catch(error => console.log("Video autoplay blocked:", error));
-                }
-            }, { once: true });
+            }
+
+            // Allow multiple interactions to start music if needed
+            document.body.addEventListener("click", startMusic, { once: true });
+            document.body.addEventListener("keydown", startMusic, { once: true });
         });
 
         function throwColors() {
