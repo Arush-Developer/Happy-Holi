@@ -43,13 +43,20 @@
             background-color: #ff6a88;
         }
 
-        .video-container {
-            width: 80%;
-            margin: 20px auto;
+        .hidden-video {
+            width: 60%;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 10px;
             border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        .video-content {
+            display: none;
+            text-align: center;
         }
 
         #holiCanvas {
@@ -64,56 +71,52 @@
 </head>
 <body>
 
-    <h1>🎶 Surprise! Your Special Song is Playing! 🎶</h1>
-    <p>Enjoy this moment, my love! ❤️</p>
-
-    <!-- Background Music (Ensured to Play) -->
+    <!-- Autoplaying Song -->
     <audio id="bgMusic" loop>
         <source src="your-song.mp3" type="audio/mp3">
         <source src="your-song.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Video (Only Plays When Clicked) -->
-    <div class="video-container">
-        <video id="surpriseVideo" width="100%" controls>
-            <source src="your-video.mp4" type="video/mp4">
-        </video>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("bgMusic");
+            audio.volume = 0.3; // Set volume to 30%
+            
+            // Start playing audio only after user interacts with the page
+            document.body.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play().catch(error => console.log("Autoplay blocked:", error));
+                }
+            }, { once: true }); // Ensures this runs only once
+        });
+    </script>
+
+    <h1>🎶 Surprise! Your Special Song is Playing! 🎶</h1>
+    <p>Enjoy this moment, my love! ❤️</p>
+
+    <!-- Hidden Video Message -->
+    <div class="hidden-video" onclick="revealVideo()">
+        <h2>🎥 Tap to Open Your Surprise Video 🎥</h2>
+        <div class="video-content" id="video">
+            <video width="80%" controls>
+                <source src="your-video.mp4" type="video/mp4">
+            </video>
+        </div>
     </div>
 
     <!-- Virtual Holi Experience -->
     <button class="btn" onclick="throwColors()">🎨 Click for Virtual Holi Splash! 🌈</button>
 
-    <!-- Navigation Buttons -->
+    <!-- Buttons to navigate -->
     <a href="scrapbook.html" class="btn">📖 Back to Scrapbook</a>
     <a href="qr_hunt.html" class="btn">🔍 Next!?</a>
 
     <canvas id="holiCanvas"></canvas>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let audio = document.getElementById("bgMusic");
-
-            audio.volume = 0.5; // Set volume to 50%
-
-            function playMusic() {
-                audio.play().then(() => {
-                    console.log("Music started successfully!");
-                }).catch(error => {
-                    console.log("Autoplay blocked, retrying...", error);
-                });
-            }
-
-            // First click or key press ensures the music starts
-            document.body.addEventListener("click", playMusic, { once: true });
-            document.body.addEventListener("keydown", playMusic, { once: true });
-
-            // If user interacts and music is still paused, force play again
-            setInterval(() => {
-                if (audio.paused) {
-                    audio.play().catch(() => {});
-                }
-            }, 3000);
-        });
+        function revealVideo() {
+            document.getElementById('video').style.display = 'block';
+        }
 
         function throwColors() {
             const canvas = document.getElementById('holiCanvas');
@@ -121,17 +124,14 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             let colors = ['#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#ffff00', '#00ffff'];
-
-            for (let i = 0; i < 250; i++) {
-                setTimeout(() => {
-                    let x = Math.random() * canvas.width;
-                    let y = Math.random() * canvas.height;
-                    let color = colors[Math.floor(Math.random() * colors.length)];
-                    ctx.fillStyle = color;
-                    ctx.beginPath();
-                    ctx.arc(x, y, Math.random() * 50 + 10, 0, Math.PI * 2);
-                    ctx.fill();
-                }, i * 10); // Delayed animation effect
+            for (let i = 0; i < 200; i++) {
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let color = colors[Math.floor(Math.random() * colors.length)];
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(x, y, Math.random() * 50 + 10, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
     </script>
