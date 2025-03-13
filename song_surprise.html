@@ -72,9 +72,16 @@
 <body>
 
     <!-- Autoplaying Song -->
-    <audio autoplay loop>
-        <source src="your-song.mp3" type="audio/mp3">
-    </audio>
+   <audio id="bgMusic" autoplay loop>
+    <source src="your-song.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    window.onload = function() {
+        let audio = document.getElementById("bgMusic");
+        audio.volume = 0.3; // Set volume to 30% (adjust as needed)
+    };
+</script>
 
     <h1>🎶 Surprise! Your Special Song is Playing! 🎶</h1>
     <p>Enjoy this moment, my love! ❤️</p>
