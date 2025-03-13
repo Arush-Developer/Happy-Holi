@@ -72,16 +72,23 @@
 <body>
 
     <!-- Autoplaying Song -->
-   <audio id="bgMusic" autoplay loop>
-    <source src="your-song.mp3" type="audio/mp3">
-</audio>
+    <audio id="bgMusic" loop>
+        <source src="your-song.mp3" type="audio/mp3">
+    </audio>
 
-<script>
-    window.onload = function() {
-        let audio = document.getElementById("bgMusic");
-        audio.volume = 0.3; // Set volume to 30% (adjust as needed)
-    };
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("bgMusic");
+            audio.volume = 0.3; // Set volume to 30%
+            
+            // Start playing audio only after user interacts with the page
+            document.body.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play().catch(error => console.log("Autoplay blocked:", error));
+                }
+            }, { once: true }); // Ensures this runs only once
+        });
+    </script>
 
     <h1>🎶 Surprise! Your Special Song is Playing! 🎶</h1>
     <p>Enjoy this moment, my love! ❤️</p>
@@ -101,7 +108,7 @@
 
     <!-- Buttons to navigate -->
     <a href="scrapbook.html" class="btn">📖 Back to Scrapbook</a>
-    <a href="qr_hunt.html" class="btn">🔍Next!?</a>
+    <a href="qr_hunt.html" class="btn">🔍 Next!?</a>
 
     <canvas id="holiCanvas"></canvas>
 
